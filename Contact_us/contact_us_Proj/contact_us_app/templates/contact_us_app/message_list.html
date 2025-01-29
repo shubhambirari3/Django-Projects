@@ -9,25 +9,34 @@
 </head>
 
 <body>
-    <div class="container mt-5">
+    <div class="container mt-5" style="padding-bottom: 100px;">
         <h1>contact Messages</h1>
-        
+        <a href="{% url 'message_create' %}" class="btn btn-primary mb-3">Create New Task</a>
         <ul class="list-group">
             {% for message in messages %}
             <li class="list-group-item">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
+                        
                         <h5>{{ message.name }}</h5>
                         <p>{{ message.email }}</p>
                         <p>Created at: {{ message.created_at }}</p>
                     
                        
                     </div>
+                    <div>
+                        <a href="{% url 'message_details' message.id %}" class="btn btn-warning btn-sm " >Details</a>
+                        
+                        
+                    </div>
                     
                 </div>
             </li>
             {% endfor %}
         </ul>
+    </div>
+    <div class="header text-center mt-5" style="position: fixed; bottom: 0; width: 100%; background: #555; color: #f1f1f1; padding: 10px 16px; opacity: 0.5;">
+        <p>Code & Design by @Shubham_B</p>
     </div>
 </body>
 

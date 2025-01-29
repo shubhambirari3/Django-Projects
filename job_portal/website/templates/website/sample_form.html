@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application </title>
+    <style>
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150vh;
+        }
+
+        form {
+            width: 50%;
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1><b> </b>
+        <center>Job Application </center>
+    </h1>
+    <div class="form-container">
+
+        <form action="{% url 'job_application' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <h3>Fill the form to apply </h3>
+            <label for="position">Position Applied For:<span style="color: red;">*</span></label>
+            <input type="text" name="position" id="position" placeholder="Enter the position you are applying for"
+                size="50" maxlength="50" required><br>
+            <br>
+            <label for="name">Full Name:<span style="color: red;">*</span></label>
+            <input type="text" name="name" id="name" placeholder="Enter your full name" size="50" maxlength="50"
+                required><br>
+            <br>
+            <label for="age">Age:<span style="color: red;">*</span></label>
+            <input type="number" name="age" id="age" placeholder=" Age" max="50" min="20"> <br>
+            <br>
+            <label for="Gender">Gender:<span style="color: red;">*</span></label><br>
+            <input type="radio" name="Gender" value="Male"> <!--Male-->
+            <label for="Gender">Male</label><br>
+            <input type="radio" name="Gender" value="Female">
+            <label for="Gender">Female</label><br>
+            <input type="radio" name="Gender" value="Other">
+            <label for="Gender">Other</label><br>
+            <br>
+            <label for="dob">Date of Birth:<span style="color: red;">*</span></label>
+            <input type="date" name="dob" id="dob" required><br>
+            <br>
+            <label for="contack">Contact:<span style="color: red;">*</span></label>
+            <input type="tel" name="contact" id="contact" placeholder="Enter your contact number" required size="50"
+                pattern="[0-9]{10}"><br>
+            <br>
+            <label for="email">Email:<span style="color: red;">*</span></label>
+            <input type="email" name="email" id="email" placeholder="Enter your email" required size="50"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"><br>
+            <br>
+            <label for="location">Current Location:<span style="color: red;">*</span></label>
+            <input type="text" name="location" id="location" placeholder="Enter your current location" required
+                size="50" maxlength="50"><br>
+            <br>
+            <label for="adress">Permanent Location:<span style="color: red;">*</span></label>
+            <textarea name="adress" id="adress" placeholder="Enter your permanent location" required rows="4"
+                cols="50"></textarea><br>
+            <br>
+            <label for="tech">Technology:<span style="color: red;">*</span></label>
+            <select name="tech" id="tech" required>
+                <option value="">Select a technology</option>
+                <option value="Python">Python</option>
+                <option value="JAVA">JAVA</option>
+                <option value="Data Analytics">Data Analytics</option>
+            </select><br>
+            <br>
+            <label for="skills">Technial Skills:<span style="color: red;">*</span></label>
+            <textarea name="skills" id="skills" cols="50" rows="3" placeholder="Enter your technical skills"
+                required></textarea> <br>
+            <br>
+            <label for="edu">Higher Education:<span style="color: red;">*</span></label>
+            <input type="text" name="edu" id="edu" placeholder="higher education" required size="50" maxlength="50"><br>
+            <br>
+            <label for="uni">Degree Univercity:<span style="color: red;">*</span></label>
+            <input type="text" name="uni" id="uni" placeholder="degree univercity" required size="50"
+                maxlength="50"><br>
+            <br>
+            <label for="cgpa">CGPA:<span style="color: red;">*</span></label>
+            <input type="number" name="cgpa" id="cgpa" placeholder=" CGPA" required max="4.0" min="0.0" step="0.01"><br>
+            <br>
+            <label for="passyear">Passing Year:<span style="color: red;">*</span></label>
+            <input type="month" name="passyear" id="passyear" placeholder="Enter your passing year" required
+                max="2024-12" min="2021-01"><br>
+            <br>
+            <label for="gap">Educational Gap:<span style="color: red;">*</span></label>
+            <input type="number" name="gap" id="gap" placeholder="Gap" required max="5" min="0"><br>
+            <br>
+            <label for="fresher">Fresher:<span style="color: red;">*</span></label>
+            <input type="radio" name="fresher" value="yes" required onclick="toggleExperience(false)"> Yes
+            <input type="radio" name="fresher" value="no" required onclick="toggleExperience(true)"> No
+            <br><br>
+            <label for="exp">Experience:<span style="color: red;">*</span></label>
+            <input type="number" name="exp" id="exp" placeholder="Experience in years" required max="10" min="0"
+                disabled><br>
+            <br>
+            <label for="current">Current Company:<span style="color: red;">*</span></label>
+            <input type="text" name="current" id="current" placeholder="Enter your current company" required size="50"
+                maxlength="50" disabled><br>
+            <br>
+            <script>
+                function toggleExperience(isEnabled) {
+                    document.getElementById('exp').disabled = !isEnabled;
+                    document.getElementById('current').disabled = !isEnabled;
+                }
+            </script>
+            <br>
+            <label for="resume">Upload Resume:<span style="color: red;">*</span></label>
+            <input type="file" name="resume" id="resume" required><br>
+            <br>
+            <summary>
+                <p>By submitting this form, you agree to the terms and conditions of the company.</p>
+            </summary>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+            <br>
+
+
+
+        </form>
+    </div>
+</body>
+
+</html>

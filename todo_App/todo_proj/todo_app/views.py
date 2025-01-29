@@ -4,7 +4,7 @@ from .models import task
 
 # Create your views here.
 def task_list(request):
-    tasks = task.objects.all()  #CRUD operation query to get all the tasks
+    tasks = task.objects.all().order_by('is_complete')  # Order tasks by completion status
 
     return  render(request , 'todo_app/task_list.html' , {'tasks': tasks})
 

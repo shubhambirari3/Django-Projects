@@ -17,7 +17,11 @@
                 <h6 class="card-subtitle mb-2 text-muted">{{ message.email }}</h6>
                 <p class="card-text">{{ message.message }}</p>
                 <p class="card-text"><small class="text-muted">Created at: {{ message.created_at }}</small></p>
+                <div>
+                <a href="{% url 'message_delete' message.id %}" class="btn btn-danger btn-sm " >Delete</a>
+                </div>
             </div>
+            
         </div>
     </div>
 </body>
