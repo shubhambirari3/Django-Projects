@@ -22,3 +22,12 @@ def message_details(request , contact_id):
     return render(request , 'contact_us_app/message_details.html' , {'message':message})
 
 
+def message_delete(request , contact_id):
+    message = get_object_or_404(contactM , id = contact_id)
+    if request.method == "POST":
+        message.delete()
+        return redirect('message_list')
+    return render(request ,'contact_us_app/message_delete.html' , {'contactM': message})
+
+
+
