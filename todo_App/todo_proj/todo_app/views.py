@@ -18,7 +18,7 @@ def task_create(request):
 
 def task_update(request , task_id):
     tasks = get_object_or_404(task , id=task_id)      #getting the task number by primary key
-    if request.method == "POST":
+    if request.method == "POST":    
         title = request.POST.get('title')                  #getting the title from the form
         note = request.POST.get('note')                  #getting the note from the form
         is_complete = request.POST.get('is_complete') == 'on'  #getting the is_complete from the form

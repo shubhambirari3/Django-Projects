@@ -27,7 +27,7 @@ def message_delete(request , contact_id):
     if request.method == "POST":
         message.delete()
         return redirect('message_list')
-    return render(request ,'contact_us_app/message_delete.html' , {'contactM': message})
+    return render(request ,'contact_us_app/message_delete.html' , {'message': message})
 
 
 
