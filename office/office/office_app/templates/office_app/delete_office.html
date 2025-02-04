@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete-records</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1> DELETE RECORDS </h1>
+        <div class="card">
+
+            <div class="card-body">
+                <h5 class="card-title">{{ records.name }}</h5>
+                <p class="card-text">{{ records.location }}</p>
+                <p class="card-number">{{ records.employees_count }}</p>
+                <p>{{ records.created_at }}</p>
+                <form method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                    {% csrf_token%}
+
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <a href="{% url 'list_office' %}" class="btn btn-secondary">Cancel</a>
+                </form>
+
+
+            </div>
+
+</body>
+
+</html>
+
+
+
+
