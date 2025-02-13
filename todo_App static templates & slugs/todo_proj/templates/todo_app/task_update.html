@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Task{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="col-6 mx-auto card p-3 shadow-lg">
+        <h1>Update Task</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="title" class="form-label">Title:</label>
+                <input type="text" id="title" name="title" value="{{ task.title }}" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="note" class="form-label">Note:</label>
+                <textarea id="note" name="note" class="form-control" required>{{ task.note }}</textarea>
+            </div>
+            <div class="form-check mb-3">
+                <input type="checkbox" id="is_complete" name="is_complete" class="form-check-input" {% if task.is_complete %}checked{% endif %}>
+                <label for="is_complete" class="form-check-label">Complete</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

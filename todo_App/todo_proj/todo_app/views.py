@@ -29,7 +29,7 @@ def task_update(request , task_id):
         return redirect('task_list')                   #redirecting to the task_list page
     return render(request , 'todo_app/task_update.html' , {'tasks': tasks}) #if the request is not post then it will render the task_update.html page
 
-def task_delete(request , task_id):
+def task_delete(request , task_id): 
     task_obj = get_object_or_404(task , id=task_id) #getting the task number by primary key
     if request.method == "POST" and request.POST.get('confirm_delete') == 'on':
         task_obj.delete() #deleting the task
