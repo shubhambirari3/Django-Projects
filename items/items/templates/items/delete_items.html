@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Delete Items{% endblock %}
+{% block content %}
+    <div class="container mt-5">
+        <div class="col-6 mx-auto card p-3 shadow-lg">
+            <h1>Delete Items</h1>
+            <p>Are you sure you want to delete "{{ item.name }}"?</p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-check mb-3">
+                    <input type="checkbox" id="confirm_delete" name="confirm_delete" class="form-check-input">
+                    <label for="confirm_delete" class="form-check-label">Yes, delete</label>
+                </div>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

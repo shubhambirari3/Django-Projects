@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+
+<div class="pb-5">
+    <div class="col-5 mx-auto card p-3 shadow-lg ">
+        <h2>Sign up</h2>
+        <hr>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="first_name">
+            </div>
+            <div class="mb-3">
+                <label for="Username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="Username" name="username">
+            </div>
+            <div class="mb-3">
+                <label for="disc" class="form-label">Email</label>
+                <input type="email" class="form-control" id="disc" name="email">
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Password</label>
+                <input type="text" class="form-control" id="price" name="password">
+            </div>
+
+            <p>Already have account? <a href="/login/">Login </a></p>
+
+            <button type="submit" class="btn btn-success w-100">Sign Up</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
