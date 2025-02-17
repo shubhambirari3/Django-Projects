@@ -33,7 +33,7 @@ def update_items(request, id):
         item.price = price
         item.save()
         return redirect('list_items')
-    return render(request, 'items/update_items.html', {"items":item})
+    return render(request, 'items/update_items.html', {"item": item})
 
 
 @login_required(login_url='login_page')

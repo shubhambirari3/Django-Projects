@@ -4,7 +4,7 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    
     path('create_items/', create_items, name='create_items'),
     path('list_items/', list_items, name='list_items'),
     path('update_items/<int:id>/', update_items, name='update_items'),

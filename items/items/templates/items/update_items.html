@@ -8,19 +8,18 @@
             {% csrf_token %}
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="form-control" id="name" name="name" value="{{ item.name }}">
             </div>
             <div class="mb-3">
-                <label for="disc" class="form-label">Discription</label>
-                <input type="text" class="form-control" id="disc" name="description">
+                <label for="disc" class="form-label">Description</label>
+                <input type="text" class="form-control" id="disc" name="description" value="{{ item.description }}">
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
-                <input type="number" class="form-control" id="price" name="price">
+                <input type="number" class="form-control" id="price" name="price" value="{{ item.price }}">
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>
 </div>
-
 {% endblock %}
