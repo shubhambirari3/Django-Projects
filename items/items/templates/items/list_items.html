@@ -1,42 +1,45 @@
 {% extends 'base.html' %}
 {% block title %}All Items{% endblock %}
 {% block content %}
-    <div style="padding-bottom: 100px;">
-        <h2 style="text-align: center;">Welcome :) <span style="font-style: italic; font-size: 1.2em;">{{ request.user.first_name }} </span></h2>
-        <h5 style="text-align: center;">A simple way to remember what you always forget !!!</h5>
-        <br>
-        <h1>All Items</h1><hr>
-        
-        <a href="{% url 'create_items' %}" class="btn btn-primary mb-3">Create New Item +</a>
-        
-        <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Item</th>
-                        <th>Description</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Updated Date</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in items %}
-                    <tr>
-                        <td>{{ item.name }}</td>
-                        <td>{{ item.description }}</td>
-                        <td>{{ item.quantity }}</td>
-                        <td>₹{{ item.price }}</td>
-                        <td>{{ item.updated_at|date:"M d, Y" }}</td>
-                        <td>
-                            <a href="{% url 'update_items' item.id %}" class="btn btn-warning btn-sm">Update</a>
-                            <a href="{% url 'delete_items' item.id %}" class="btn btn-danger btn-sm">Delete</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+<div style="padding-bottom: 100px;">
+    <h2 style="text-align: center; text-transform: uppercase;">
+        Welcome :) <span style="font-style: italic; font-size: 1.2em;">{{ request.user.first_name|upper }}</span>
+    </h2>
+    <h5 style="text-align: center;">A simple way to remember what you always forget !!!</h5>
+    <br>
+    <h1>All Items</h1>
+    <hr>
+
+    <a href="{% url 'create_items' %}" class="btn btn-primary mb-3">Create New Item +</a>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Updated Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₹{{ item.price }}</td>
+                    <td>{{ item.updated_at|date:"M d, Y" }}</td>
+                    <td>
+                        <a href="{% url 'update_items' item.id %}" class="btn btn-warning btn-sm">Update</a>
+                        <a href="{% url 'delete_items' item.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+</div>
 {% endblock %}
