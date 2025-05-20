@@ -11,26 +11,30 @@ def create_items(request):
         name = request.POST.get('name')
         description = request.POST.get('description')
         price = request.POST.get('price')
-        Item.objects.create(name=name, description=description, price=price)
+        quantity = request.POST.get('quantity') 
+        user = request.user
+        Item.objects.create(name=name, description=description, price=price, quantity=quantity, user=user)
         return redirect('list_items')
     return render(request, 'items/create_items.html')
 
 
 @login_required(login_url='login_page')
 def list_items(request):
-    items = Item.objects.all()
+    items = Item.objects.filter(user=request.user)
     return render(request, 'items/list_items.html', {"items":items})
 
 @login_required(login_url='login_page')
 def update_items(request, id):
-    item = Item.objects.get(id=id)
+    item = Item.objects.get(id=id, user=request.user)
     if request.method == 'POST':
         name = request.POST.get('name')
         description = request.POST.get('description')   
         price = request.POST.get('price')
+        quantity = request.POST.get('quantity')  
         item.name = name
         item.description = description
         item.price = price
+        item.quantity = quantity  
         item.save()
         return redirect('list_items')
     return render(request, 'items/update_items.html', {"item": item})
