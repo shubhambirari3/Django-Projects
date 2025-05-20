@@ -5,7 +5,7 @@ A simple Python Django web app to manage grocery items. It allows users to Creat
 
 ## Features
 - User authentication (login, logout, signup)
-- Create, update, delete, and Read list items
+- Create, update, delete, and Read list items  (CRUD Operations)
 - Items displayed in a clean list format (grid-style)
 - Timestamps for created and updated entries
 
