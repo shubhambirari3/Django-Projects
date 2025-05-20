@@ -22,5 +22,10 @@ A simple Python Django web app to manage grocery items. It allows users to Creat
 ## URL Links
 - Web App Link: http://127.0.0.1:8000/home/
 
+## Screenshots
+*Homepage of the application.*
+
+![Homepage](templates\screencapture-127-0-0-1-8000-home-2025-05-20-21_19_31.png)
+
 
 
