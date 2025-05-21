@@ -8,30 +8,34 @@
         <hr>
 
         {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
         {% endif %}
 
         <form action="" method="POST">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="first_name">
+                <input type="text" class="form-control" id="name" name="first_name" required minlength="2"
+                    maxlength="50" pattern="[A-Za-z\s]+" title="Name should only contain letters and spaces">
             </div>
             <div class="mb-3">
                 <label for="Username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="Username" name="username">
+                <input type="text" class="form-control" id="Username" name="username" required minlength="3"
+                    maxlength="30" pattern="^[\w@]+$"
+                    title="Username should only contain letters, numbers, and underscores">
             </div>
             <div class="mb-3">
                 <label for="disc" class="form-label">Email</label>
-                <input type="email" class="form-control" id="disc" name="email">
+                <input type="email" class="form-control" id="disc" name="email" required maxlength="100">
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Password</label>
-                <input type="text" class="form-control" id="price" name="password">
+                <input type="password" class="form-control" id="price" name="password" required minlength="8"
+                    maxlength="128" title="Password should be at least 8 characters">
             </div>
 
             <p>Already have account? <a href="/login/">Login </a></p>
@@ -41,4 +45,4 @@
     </div>
 </div>
 
-{% endblock %} 
+{% endblock %}

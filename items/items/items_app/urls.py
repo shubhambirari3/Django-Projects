@@ -1,7 +1,7 @@
-
 from django.contrib import admin
 from django.urls import path
 from .views import *
+from . import views
 
 urlpatterns = [
     
@@ -12,4 +12,5 @@ urlpatterns = [
     path('login/', login_page, name='login_page'),
     path('signup/', sign_up, name='sign_up'),
     path('logout/', logout_user, name='logout_user'),
-]  
+    path('toggle_checked/<int:id>/', views.toggle_checked, name='toggle_checked'),
+]

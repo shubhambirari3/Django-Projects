@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login ,logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 
 @login_required(login_url='login_page')
 def create_items(request):
@@ -20,8 +21,12 @@ def create_items(request):
 
 @login_required(login_url='login_page')
 def list_items(request):
-    items = Item.objects.filter(user=request.user)
-    return render(request, 'items/list_items.html', {"items":items})
+    unchecked_items = Item.objects.filter(user=request.user, checked=False)
+    checked_items = Item.objects.filter(user=request.user, checked=True)
+    return render(request, 'items/list_items.html', {
+        "unchecked_items": unchecked_items,
+        "checked_items": checked_items
+    })
 
 @login_required(login_url='login_page')
 def update_items(request, id):
@@ -89,3 +94,11 @@ def sign_up(request):
         messages.success(request, 'User account created successfully', extra_tags='success')
         return redirect('sign_up')
     return render(request, 'accounts/signup.html')
+
+@login_required(login_url='login_page')
+@require_POST
+def toggle_checked(request, id):
+    item = Item.objects.get(id=id, user=request.user)
+    item.checked = not item.checked
+    item.save()
+    return redirect('list_items')

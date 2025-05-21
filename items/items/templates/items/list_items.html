@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 {% block title %}All Items{% endblock %}
 {% block content %}
+<style>
+/* Custom green checkbox */
+input[type="checkbox"].green-checkbox:checked {
+    accent-color: #28a745;
+}
+/* Bigger checkbox */
+input[type="checkbox"].green-checkbox {
+    width: 1.5em;
+    height: 1.5em;
+}
+</style>
 <div style="padding-bottom: 100px;">
     <h2 style="text-align: center; text-transform: uppercase;">
         Welcome :) <span style="font-style: italic; font-size: 1.2em;">{{ request.user.first_name|upper }}</span>
@@ -13,9 +24,11 @@
     <a href="{% url 'create_items' %}" class="btn btn-primary mb-3">Create New Item +</a>
 
     <div class="table-responsive">
-        <table class="table table-striped table-hover">
+        <h4>Pending Items</h4>
+        <table class="table table-striped table-hover align-middle">
             <thead class="table-dark">
                 <tr>
+                    <th style="width:40px;"></th>
                     <th>Item</th>
                     <th>Description</th>
                     <th>Quantity</th>
@@ -25,8 +38,14 @@
                 </tr>
             </thead>
             <tbody>
-                {% for item in items %}
+                {% for item in unchecked_items %}
                 <tr>
+                    <td>
+                        <form method="POST" action="{% url 'toggle_checked' item.id %}">
+                            {% csrf_token %}
+                            <input type="checkbox" class="green-checkbox" onchange="this.form.submit()" {% if item.checked %}checked{% endif %}>
+                        </form>
+                    </td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.description }}</td>
                     <td>{{ item.quantity }}</td>
@@ -37,6 +56,46 @@
                         <a href="{% url 'delete_items' item.id %}" class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>
+                {% empty %}
+                <tr><td colspan="7" class="text-center">No unchecked items.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h4>Finished Items</h4>
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th style="width:40px;"></th>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Updated Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in checked_items %}
+                <tr>
+                    <td>
+                        <form method="POST" action="{% url 'toggle_checked' item.id %}">
+                            {% csrf_token %}
+                            <input type="checkbox" class="green-checkbox" onchange="this.form.submit()" {% if item.checked %}checked{% endif %}>
+                        </form>
+                    </td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₹{{ item.price }}</td>
+                    <td>{{ item.updated_at|date:"M d, Y" }}</td>
+                    <td>
+                        <a href="{% url 'update_items' item.id %}" class="btn btn-warning btn-sm">Update</a>
+                        <a href="{% url 'delete_items' item.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="7" class="text-center">No checked items.</td></tr>
                 {% endfor %}
             </tbody>
         </table>

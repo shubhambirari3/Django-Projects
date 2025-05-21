@@ -10,21 +10,22 @@
             {% csrf_token %}
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="form-control" id="name" name="name" required minlength="2" maxlength="15" pattern="[A-Za-z\s]+" title="Name should only contain letters and spaces">
             </div>
             <div class="mb-3">
                 <label for="disc" class="form-label">Discription</label>
-                <input type="text" class="form-control" id="disc" name="description">
+                <input type="text" class="form-control" id="disc" name="description" maxlength="500">
             </div>
             <div class="mb-3">
                 <label for="disc" class="form-label">Quantity</label>
-                <input type="text" class="form-control" id="disc" name="quantity">
+                <input type="number" class="form-control" id="quantity" name="quantity" value="1" min="1">
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
-                <input type="number" class="form-control" id="price" name="price">
+                <input type="number" class="form-control" id="price" name="price" required min="0.01" max="1000000" step="0.01">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="{% url 'list_items' %}" class="btn btn-secondary ms-2">Cancel</a>
         </form>
     </div>
 </div>
